@@ -22,14 +22,22 @@ public class Main {
             entrada.nextLine();
 
             if (opcao == 1) {
-                // aqui iremos cadastrar uma nova família
+                // aqui iremos cadastrar uma nova família indo pelo fluxograma da helena
+                // Perguntar ao usuário sua renda per capital, número de dependentes, 
+                // se tem alguma deficiência, 
+                // se apresenta risco de violência urbana e causas naturais e tempo de desemprego.
+                // e dai quando apertar essa opção já criar uma familia, 
+                // podendo ser F001, se logo em seguida outra ser criada vai na lógica, F002 e assim por diante...
+
             } else if (opcao == 2) {
                 // aqui iremos listar as familias que tem, exemplo: F001, dae vai dizer tudo em
                 // questão
                 // da renda, dos dependentes... essas coisas
+
             } else if (opcao == 3) {
                 // aqui iremos calcular as prioridades sem precisar cadastrar, pra fazer tipo
                 // uma simulação
+
             } else if (opcao == 4) {
                 System.out.println("\n Sistema encerrando...");
                 break;
@@ -41,7 +49,7 @@ public class Main {
 
 }
 
-// dados da família
+// dados das famílias
 
 class Familia {
 
@@ -67,6 +75,7 @@ class Familia {
     }
 
     // mostrar todas as informações da familia de forma organizada.
+    // daqui jogaremos pro if, lá em cima...
 
     public void mostrarDados() {
 
