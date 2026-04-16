@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
 
-        ArrayList<String> familias = new ArrayList<>(); // guardar toda informações das familias
+        ArrayList<Familia> familias = new ArrayList<>(); // guardar toda informações das familias
 
         System.out.println("---Sistema de prioridade---");
 
@@ -22,12 +22,22 @@ public class Main {
             entrada.nextLine();
 
             if (opcao == 1) {
-                // aqui iremos cadastrar uma nova família indo pelo fluxograma da helena
-                // Perguntar ao usuário sua renda per capital, número de dependentes, 
-                // se tem alguma deficiência, 
-                // se apresenta risco de violência urbana e causas naturais e tempo de desemprego.
-                // e dai quando apertar essa opção já criar uma familia, 
-                // podendo ser F001, se logo em seguida outra ser criada vai na lógica, F002 e assim por diante...
+                System.out.println("---Cadastro de Nova Família---");    
+                
+                System.out.println("Qual a sua renda per capita? ");
+                int rendaPerCapita = entrada.nextInt();
+
+                System.out.println("Tem Dependentes? "); // matheus, vê essa linha pra mim, não entendi se é: "tem dependentes" ou "É dependente"!!
+
+
+                System.out.println("Tem deficiência? ");
+                String respostaDeficientes = entrada.nextLine(). trim();
+                boolean deficientes;
+
+                System.out.println("Mora em risco de Violência Urbana ou risco de Castratofes naturais? ");
+                String risco = entrada.nextLine();
+
+                System.out.println("Quanto tempo está desempregado? "); // matheus, vê essa linha pra mim tbm, não sei se coloco realmente o String ou Int.
 
             } else if (opcao == 2) {
                 // aqui iremos listar as familias que tem, exemplo: F001, dae vai dizer tudo em
