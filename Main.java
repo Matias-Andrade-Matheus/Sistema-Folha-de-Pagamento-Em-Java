@@ -24,20 +24,40 @@ public class Main {
             if (opcao == 1) {
                 System.out.println("---Cadastro de Nova Família---");    
                 
-                System.out.println("Qual a sua renda per capita? ");
+                System.out.println("Qual a renda per capita da família? ");
                 int rendaPerCapita = entrada.nextInt();
 
-                System.out.println("Tem Dependentes? "); // matheus, vê essa linha pra mim, não entendi se é: "tem dependentes" ou "É dependente"!!
+                System.out.println("Quantos dependentes tem na família? ");
+                int dependentes = entrada.nextInt(); 
 
+                System.out.println("Alguém da família tem algum tipo de deficiência? (true/false)");
+                String respostaDef = entrada.nextLine(). toLowerCase();
+                boolean deficientes = respostaDef.equals("sim");
 
-                System.out.println("Tem deficiência? ");
-                String respostaDeficientes = entrada.nextLine(). trim();
-                boolean deficientes;
+                entrada.nextLine();
 
-                System.out.println("Mora em risco de Violência Urbana ou risco de Castratofes naturais? ");
+                System.out.println("Qual nível do risco do bairro?  (Alto / Médio / baixo) ");
                 String risco = entrada.nextLine();
 
-                System.out.println("Quanto tempo está desempregado? "); // matheus, vê essa linha pra mim tbm, não sei se coloco realmente o String ou Int.
+                System.out.println("Quantos meses alguém está desempregado? "); // matheus, vê essa linha pra mim tbm, não sei se coloco realmente o String ou Int.
+                int desemprego = entrada.nextInt();
+
+
+
+                // ----PARTE DA CRIAÇÃO DE TODAS AS FAMÍLIAS----
+
+                //Aqui cria o código da família automaticamente (F001, F002, F003 e assim vai)
+                String idFamilia = "F" + String.format("%03d", familias.size() + 1);
+
+                //coloca os dados acima na família q foi criada agora.
+                Familia novaFamilia = new Familia(idFamilia, rendaPerCapita, dependentes, deficientes, desemprego, risco, 0);
+
+                //guarda a família na lista
+                familias.add(novaFamilia);
+
+                System.out.println("\nFamília " +idFamilia+ " cadastrada com sucesso!");
+
+
 
             } else if (opcao == 2) {
                 // aqui iremos listar as familias que tem, exemplo: F001, dae vai dizer tudo em
