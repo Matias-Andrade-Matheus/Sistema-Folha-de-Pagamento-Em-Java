@@ -30,7 +30,7 @@ public class Main {
                 System.out.println("Quantos dependentes tem na família? ");
                 int dependentes = entrada.nextInt();
 
-                System.out.println("Alguém da família tem algum tipo de deficiência? (true/false)");
+                System.out.println("Alguém da família tem algum tipo de deficiência? (sim/não)");
                 String respostaDef = entrada.nextLine().toLowerCase();
                 boolean deficientes = respostaDef.equals("sim");
 
