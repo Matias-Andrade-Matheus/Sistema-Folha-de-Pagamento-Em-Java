@@ -22,6 +22,9 @@ public class Main {
             entrada.nextLine();
 
             if (opcao == 1) {
+                boolean flagRisco = false;
+                boolean flagDesemprego = false;
+
                 System.out.println("---Cadastro de Nova Família---");
 
                 System.out.println("Qual a renda per capita da família? ");
@@ -32,17 +35,43 @@ public class Main {
 
                 System.out.println("Alguém da família tem algum tipo de deficiência? (sim/não)");
                 String respostaDef = entrada.nextLine().toLowerCase();
-                boolean deficientes = respostaDef.equals("sim");
+                if (respostaDef.equals("sim")) {
+                    boolean deficiencia = true;
+                    System.out.println("Quantos integrantes da família tem algum tipo de deficiência?");
+                    int numeroDeficientes = entrada.nextInt();
+                } else if (respostaDef.equals("nao") || respostaDef.equals("não")) {
+                    boolean deficiencia = false;
+                }
 
                 entrada.nextLine();
 
-                System.out.println("Qual nível do risco do bairro?  (Alto / Médio / baixo) ");
-                String risco = entrada.nextLine();
+                while (!flagRisco) {
+                    System.out.println("Existe um nível de risco no seu bairro? (sim/não)");
+                    String respostaRisco = entrada.nextLine().toLowerCase();
+                    if (respostaRisco.equals("sim")) {
+                        System.out.println("Que tipo de risco? (violência/natural/ambos)");
+                        String tipoRisco = entrada.nextLine().toLowerCase();
+                        flagRisco = true;
+                    } else if (respostaRisco.equals("não")) {
+                        String tipoRisco = "nenhum";
+                        flagRisco = true;
+                    } else {
+                        System.out.println("Preencha com uma resposta válida.");
+                    }}
 
-                System.out.println("Quantos meses alguém está desempregado? "); // matheus, vê essa linha pra mim tbm,
-                                                                                // não sei se coloco realmente o String
-                                                                                // ou Int.
-                int desemprego = entrada.nextInt();
+                while (!flagDesemprego) {
+                    System.out.println("Alguém da família está desempregado? (sim/não)");
+                    String respostaDes = entrada.nextLine().toLowerCase();
+                    if (respostaDes.equals("sim")) {
+                        System.out.println("Quantos meses alguém está desempregado? ");
+                        int desemprego = entrada.nextInt();
+                        flagDesemprego = true;
+                    } else if (respostaDes.equals("não")) {
+                        int desemprego = 0;
+                        flagDesemprego = true;
+                    } else {
+                        System.out.println("Preencha com uma resposta válida.");
+                    }}
 
                 // ----PARTE DA CRIAÇÃO DE TODAS AS FAMÍLIAS----
 
@@ -59,13 +88,20 @@ public class Main {
                 System.out.println("\nFamília " + idFamilia + " cadastrada com sucesso!");
 
             } else if (opcao == 2) {
-                // aqui iremos listar as familias que tem, exemplo: F001, dae vai dizer tudo em
-                // questão
-                // da renda, dos dependentes... essas coisas
+                System.out.println("--- Lista de Famílias ---");
+                for (Familia f : familias) {
+                    f.mostrarDados();
+                }
 
             } else if (opcao == 3) {
-                // aqui iremos calcular as prioridades sem precisar cadastrar, pra fazer tipo
-                // uma simulação
+                // Ordena a lista do maior bônus para o menor
+                familias.sort((f1, f2) -> Integer.compare(f2.bonus, f1.bonus));
+
+                System.out.println("--- Fila de Prioridade (Ranking) ---");
+                for (int i = 0; i < familias.size(); i++) {
+                    familias.get(i).calcularPontuacao();
+                    System.out.println((i + 1) + "º Lugar: " + familias.get(i).idFamilia + " - Pontos: " + familias.get(i).total);
+                }
 
             } else if (opcao == 4) {
                 System.out.println("\n Sistema encerrando...");
@@ -78,47 +114,92 @@ public class Main {
 
 }
 
-// dados das famílias
+public void desemprego(){
 
+}
+
+// dados das famílias
 class Familia {
 
     String idFamilia;
     int rendaPerCapita;
     int dependentes;
-    boolean deficientes;
+    boolean deficiencia;
+    int deficientes;
     int desemprego;
     String risco;
     int bonus;
+    int total;
 
-    public Familia(String idFamilia, int rendaPerCapita, int dependentes, boolean deficientes, int desemprego,
-            String risco, int bonus) {
+    public Familia(String idFamilia, int rendaPerCapita, int dependentes, boolean deficiencia, int deficientes, int desemprego,
+            String risco) {
 
         this.idFamilia = idFamilia;
         this.rendaPerCapita = rendaPerCapita;
         this.dependentes = dependentes;
+        this.deficiencia = deficiencia;
         this.deficientes = deficientes;
         this.desemprego = desemprego;
         this.risco = risco;
-        this.bonus = bonus;
+        this.bonus = 15;
+        this.total = 0;
 
     }
 
     // mostrar todas as informações da familia de forma organizada.
     // daqui jogaremos pro if, lá em cima...
 
+    public void calcularPontuacao() {
+        if (rendaPerCapita <= 200) {
+            this.total = this.total + this.bonus + 10;
+        } else if (rendaPerCapita <= 400) {
+            this.total = this.total + this.bonus;
+        } else if (rendaPerCapita <= 600) {
+            this.total = this.total + 10;
+        } else if (rendaPerCapita <= 700) {
+            this.total = this.total + 5;
+        }
+
+        if (deficientes > 0) {
+            this.total = this.total + 10 * this.deficientes;
+        }
+
+        if (dependentes > 0) {
+            this.total = this.total + 10 * this.dependentes;
+        }
+
+        if (risco != null) {
+            if (risco.equals("violencia") || risco.equals("violência") || risco.equals("natural")) {
+                this.total = this.total + 7;
+            } else if (risco.equals("ambos")) {
+                this.total = this.total + 10;
+            }
+        }
+
+        if (desemprego > 0) {
+            if (desemprego <= 6) {
+                this.total = this.total + 5;
+            } else if (desemprego >= 12) {
+                this.total = this.total + 10;
+            }
+        }
+    }
+
     public void mostrarDados() {
 
-        System.out.println("Id: " + idFamilia);
-        System.out.println("Renda per capita: " + rendaPerCapita);
-        System.out.println("Dependentes: " + dependentes);
-        System.out.println("Deficiência? " + deficientes);
-        System.out.println("Desemprego: " + desemprego + " meses");
-        System.out.println("Risco: " + risco);
-        System.out.println("Prioridade: " + bonus);
-        System.out.println("");
+        System.out.println("Id: " + this.idFamilia);
+        System.out.println("Renda per capita: " + this.rendaPerCapita);
+        System.out.println("Dependentes: " + this.dependentes);
+        System.out.println("Deficiência? " + this.deficientes);
+        System.out.println("Desemprego: " + this.desemprego + " meses");
+        System.out.println("Risco: " + this.risco);
+        System.out.println("Prioridade: " + this.total + "\n");
 
     }
 
+}
+
+void main() {
 }
 
 // não sei se tô fazendo certo, mas acho q tô começando a entender
