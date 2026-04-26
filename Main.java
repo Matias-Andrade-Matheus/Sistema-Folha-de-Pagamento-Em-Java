@@ -138,15 +138,7 @@ public class Main {
         }
 
     }
-
-}
-
-public void desemprego(){
-
-}
-
-// dados das famílias
-static class Familia {
+    static class Familia {
 
     String idFamilia;
     int rendaPerCapita;
@@ -219,15 +211,18 @@ static class Familia {
         System.out.println("Prioridade: " + this.total + "\n");
 
     }
-    
-    public String getNivelVulnerabilidade() {
+
+
+ public String getNivelVulnerabilidade() {
         if (this.total > 50) return Main.VERMELHO + "CRÍTICA" + Main.RESET;
         if (this.total > 30) return Main.AMARELO + "MODERADA" + Main.RESET;
         return Main.VERDE + "BAIXA" + Main.RESET;
     }
 
+    }
 
 }
 
-void main() {
-}
+
+ 
+
