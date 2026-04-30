@@ -6,11 +6,11 @@ O sistema calcula uma pontuação de prioridade com base em critérios como: ren
 
 ## Principais Funcionalidades
 
-Cadastro de Famílias: Por meio de uma breve entrevista, há a coleta de dados sobre as famílias envolvidas no benefício.
+- Cadastro de Famílias: Por meio de uma breve entrevista, há a coleta de dados sobre as famílias envolvidas no benefício.
 
-Cálculo de Pontuação: Algoritmo gera pontos com condições de bônus para priorização de certos grupos desfavorecidos conforme critérios pré-estabelecidos.
+- Cálculo de Pontuação: Algoritmo gera pontos com condições de bônus para priorização de certos grupos desfavorecidos conforme critérios pré-estabelecidos.
 
-Classificação de Vulnerabilidade: Com identificação visual (colorida no terminal), o programa apresenta os seguintes níveis:
+- Classificação de Vulnerabilidade: Com identificação visual (colorida no terminal), o programa apresenta os seguintes níveis:
 
 🔴 CRÍTICA: Acima de 50 pontos.
 
