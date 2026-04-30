@@ -5,13 +5,21 @@ O programa auxilia na triagem e classificação de famílias para programas de a
 O sistema calcula uma pontuação de prioridade com base em critérios como: renda per capita, número de dependentes de pessoas com algum tipo de deficiência, nível de desemprego e nível de riscos habitacionais.
 
 ## Principais Funcionalidades
+
 Cadastro de Famílias: Por meio de uma breve entrevista, há a coleta de dados sobre as famílias envolvidas no benefício.
+
 Cálculo de Pontuação: Algoritmo gera pontos com condições de bônus para priorização de certos grupos desfavorecidos conforme critérios pré-estabelecidos.
+
 Classificação de Vulnerabilidade: Com identificação visual (colorida no terminal), o programa apresenta os seguintes níveis:
+
 🔴 CRÍTICA: Acima de 50 pontos.
+
 🟡 MODERADA: Entre 31 e 50 pontos.
+
 🟢 BAIXA: Até 30 pontos.
+
 Ranking de Prioridade: O sistema cria uma ordenação das famílias cadastradas da mais necessitada para a menos necessitada.
+
 Persistência de Dados: Salvamento automático em arquivo texto (familias.txt) para não perder os dados ao fechar o programa.
 ## Critérios de Pontuação
 O sistema utiliza a seguinte lógica para calcular a prioridade:
