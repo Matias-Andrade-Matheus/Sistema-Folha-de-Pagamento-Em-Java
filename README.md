@@ -13,11 +13,11 @@ O sistema calcula uma pontuação de prioridade com base em critérios como: ren
 - Classificação de Vulnerabilidade: 
 Identificação visual (colorida no terminal), o programa apresenta os seguintes níveis:
 
-🔴 CRÍTICA: Acima de 50 pontos.
+- (🔴) CRÍTICA: Acima de 50 pontos.
 
-🟡 MODERADA: Entre 31 e 50 pontos.
+- (🟡) MODERADA: Entre 31 e 50 pontos.
 
-🟢 BAIXA: Até 30 pontos.
+- (🟢) BAIXA: Até 30 pontos.
 
 - Ranking de Prioridade: O sistema cria uma ordenação das famílias cadastradas da mais necessitada para a menos necessitada.
 
@@ -26,34 +26,67 @@ Identificação visual (colorida no terminal), o programa apresenta os seguintes
 ## Critérios de Pontuação
 O sistema utiliza a seguinte lógica para calcular a prioridade:
 
-### Renda Per Capita 
-- Renda Per Capita até R$200 -> +25 pontos
+- Renda Per Capita familiar
 
-- Renda Per Capita entre R$201 e R$400 -> +15 pontos
+- Dependentes na família
 
-- Renda Per Capita entre R$401 e R$600 -> +10 pontos
+- Integrantes da família com deficiência
 
-### Dependentes
-- Possui dependentes: +10 pontos por dependente
+- Risco no bairro de moradia
 
-### Integrantes com deficiência
-+10 pontos por integrante
+- Desempregados por tempo de desemprego em meses
 
-### Risco no bairro (Violência/Natural/Ambos) 
-+7 a +10 pontos
 
-### Desemprego (Acima de 12 meses)
-+10 pontos
+#### Renda Per Capita familiar
+A renda familiar medida pelo sistema se baseia em Renda Per Capita, isso é, soma total da renda bruta familiar e divide por integrante.
+
+Por tanto, as variações desse cálculo se incluem no sistema da seguinte forma de pontuação: 
+
+- Renda Per Capita até R$ 200 -> +25 pontos
+
+- Renda Per Capita entre R$ 201 e R$ 400 -> +15 pontos
+
+- Renda Per Capita entre R$ 401 e R$ 600 -> +10 pontos
+
+- Renda Per Capita entre R$ 601 e R$ 700 -> +5 pontos
+
+
+#### Dependentes na família
+Para cada integrante da família que é dependente, quem não possui renda, o sistema soma 10 pontos:
+
+- Se possui dependentes: +10 pontos por dependente
+
+#### Integrantes com deficiência
+Nessa parte do sistema existe uma verificação de resposta para a presença ou não de uma pessoa que possui está limitação (Sim/Não) na família que está sendo cadastrada. Tal método é aplicado para certificação de que esse usuário pretende utilizar-se deste benefício.
+
+Para cada integrante da família que possui algum tipo de deficiência o sistema soma 10 pontos:
+
+- Se possui deficiência: +10 pontos por integrante
+
+#### Risco no bairro (Violência/Natural/Ambos) 
+Nessa parte do sistema existe uma verificação de resposta para a aplicação do grupo familiar no benefício (Sim/Não) e do tipo de aplicação (Violência/Natural/Ambos) da família que está sendo cadastrada. Tal método é aplicado para certificação de que esse usuário pretende utilizar-se deste benefício e como utilizará.
+
+Para esta questão social na família, se presente, o sistema soma 7 pontos ou 10 pontos:
+
+- Se a família aplica-se em um Risco do tipo Violência ou Natural: +7 pontos
+
+- Se a família aplica-se em Ambos os Riscos: +10 pontos
+
+#### Desemprego (Entre 6 e 12 meses e acima de 12 meses)
+Nessa parte do sistema existe uma verificação de resposta para a presença ou não de uma pessoa que possui esta questão (Sim/Não) na família que está sendo cadastrada.
+
+Para esta questão social na família, se presente, o sistema soma 7 pontos ou 10 pontos:
+
+- Entre 6 e 12 meses: +7 Pontos
+
+- Acima de 12 meses: +10 pontos
 
 ## Tecnologias Utilizadas
+- Linguagem: Java (JDK 17+)
 
-Linguagem: Java (JDK 17+)
+- IDE recomendada: IntelliJ IDEA
 
-IDE recomendada: IntelliJ IDEA
-
-Manipulação de Dados: ArrayList e Collections
-
-Persistência: File I/O (PrintWriter e Scanner)
+- Manipulação de Dados: ArrayList e Collections
 
 ## Como Executar
 1. Certifique-se de ter o JDK instalado em sua máquina.
@@ -73,10 +106,15 @@ Ao iniciar o programa, você verá um menu interativo:
 ## Estrutura do Projeto
 
 ├── Main.java         # Código fonte principal e classe interna Familia
+
 ├── familias.txt      # Arquivo gerado automaticamente com os dados salvos
+
 └── README.md         # Documentação do projeto
 
 # Autores
+
 Helena (nome completo) - Github []
+
 Rafael (nome completo) - Github []
+
 Matheus Henrique Matias Andrade - GitHub []
