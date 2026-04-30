@@ -13,11 +13,11 @@ O sistema calcula uma pontuação de prioridade com base em critérios como: ren
 - Classificação de Vulnerabilidade: 
 Identificação visual (colorida no terminal), o programa apresenta os seguintes níveis:
 
-- (🔴) CRÍTICA: Acima de 50 pontos.
+-> (🔴) CRÍTICA: Acima de 50 pontos.
 
-- (🟡) MODERADA: Entre 31 e 50 pontos.
+-> (🟡) MODERADA: Entre 31 e 50 pontos.
 
-- (🟢) BAIXA: Até 30 pontos.
+-> (🟢) BAIXA: Até 30 pontos.
 
 - Ranking de Prioridade: O sistema cria uma ordenação das famílias cadastradas da mais necessitada para a menos necessitada.
 
