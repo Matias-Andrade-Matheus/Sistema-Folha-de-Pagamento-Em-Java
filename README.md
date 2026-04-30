@@ -10,7 +10,8 @@ O sistema calcula uma pontuação de prioridade com base em critérios como: ren
 
 - Cálculo de Pontuação: Algoritmo gera pontos com condições de bônus para priorização de certos grupos desfavorecidos conforme critérios pré-estabelecidos.
 
-- Classificação de Vulnerabilidade: Com identificação visual (colorida no terminal), o programa apresenta os seguintes níveis:
+- Classificação de Vulnerabilidade: 
+Identificação visual (colorida no terminal), o programa apresenta os seguintes níveis:
 
 🔴 CRÍTICA: Acima de 50 pontos.
 
@@ -18,44 +19,64 @@ O sistema calcula uma pontuação de prioridade com base em critérios como: ren
 
 🟢 BAIXA: Até 30 pontos.
 
-Ranking de Prioridade: O sistema cria uma ordenação das famílias cadastradas da mais necessitada para a menos necessitada.
+- Ranking de Prioridade: O sistema cria uma ordenação das famílias cadastradas da mais necessitada para a menos necessitada.
 
-Persistência de Dados: Salvamento automático em arquivo texto (familias.txt) para não perder os dados ao fechar o programa.
+- Persistência de Dados: Salvamento automático em arquivo texto (familias.txt) para não perder os dados ao fechar o programa.
+
 ## Critérios de Pontuação
 O sistema utiliza a seguinte lógica para calcular a prioridade:
+
 ### Renda Per Capita 
-Renda Per Capita até R$200 -> +25 pontos
-Renda Per Capita entre R$201 e R$400 -> +15 pontos
-Renda Per Capita entre R$401 e R$600 -> +10 pontos
+- Renda Per Capita até R$200 -> +25 pontos
+
+- Renda Per Capita entre R$201 e R$400 -> +15 pontos
+
+- Renda Per Capita entre R$401 e R$600 -> +10 pontos
+
 ### Dependentes
-Possui dependentes +10 pontos por dependente
-Integrantes com deficiência	+10 pontos por integrante
-Risco no bairro (Violência/Natural)	+7 a +10 pontos
-Desemprego (Acima de 12 meses)	+10 pontos
-🛠️ Tecnologias Utilizadas
+- Possui dependentes: +10 pontos por dependente
+
+### Integrantes com deficiência
++10 pontos por integrante
+
+### Risco no bairro (Violência/Natural/Ambos) 
++7 a +10 pontos
+
+### Desemprego (Acima de 12 meses)
++10 pontos
+
+## Tecnologias Utilizadas
+
 Linguagem: Java (JDK 17+)
+
 IDE recomendada: IntelliJ IDEA
+
 Manipulação de Dados: ArrayList e Collections
+
 Persistência: File I/O (PrintWriter e Scanner)
-📦 Como Executar
-Certifique-se de ter o JDK instalado em sua máquina.
-Clone este repositório ou baixe o arquivo Main.java.
-Abra o projeto no IntelliJ IDEA.
-Certifique-se de que o arquivo Main.java está marcado como Source Root.
-Execute a classe Main.
-🖥️ Exemplo de Uso
+
+## Como Executar
+1. Certifique-se de ter o JDK instalado em sua máquina.
+2. Clone este repositório ou baixe o arquivo Main.java.
+3. Abra o projeto no IntelliJ IDEA.
+4. Certifique-se de que o arquivo Main.java está marcado como Source Root.
+5. Execute a classe Main.
+
+## Exemplo de Uso
 Ao iniciar o programa, você verá um menu interativo:
-code
-Text
+
 1 - Cadastrar nova família
 2 - Listar famílias
 3 - Ver prioridade na fila
 4 - Sair
-📂 Estrutura do Projeto
-code
-Text
+
+## Estrutura do Projeto
+
 ├── Main.java         # Código fonte principal e classe interna Familia
 ├── familias.txt      # Arquivo gerado automaticamente com os dados salvos
 └── README.md         # Documentação do projeto
-✒️ Autor
-Seu Nome - Seu GitHub
+
+# Autores
+Helena (nome completo) - Github []
+Rafael (nome completo) - Github []
+Matheus Henrique Matias Andrade - GitHub []
