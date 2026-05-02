@@ -113,8 +113,8 @@ Ao iniciar o programa, você verá um menu interativo:
 
 # Autores
 
-Helena (nome completo) - Github []
+Helena (nome completo) - Github [https://github.com/helenalucchesi]
 
-Rafael (nome completo) - Github []
+Rafael (nome completo) - Github [https://github.com/rafaalves0]
 
-Matheus Henrique Matias Andrade - GitHub []
+Matheus Henrique Matias Andrade - GitHub [https://github.com/Matias-Andrade-Matheus]
