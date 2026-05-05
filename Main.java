@@ -172,7 +172,7 @@ public class Main {
         } else if (rendaPerCapita <= 600) {
             this.total = this.total + 10;
         } else if (rendaPerCapita <= 700) {
-            this.total = this.total + 5;
+            this.total = this.total + 5:
         }
 
         if (deficientes > 0) {
