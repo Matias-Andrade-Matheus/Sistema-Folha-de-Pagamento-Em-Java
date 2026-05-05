@@ -1,5 +1,3 @@
-
-// arquivo inicial do trabalho
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Comparator;
@@ -14,23 +12,23 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
-
-        ArrayList<Familia> familias = new ArrayList<>(); // guardar todas informações das familias
+        ArrayList<Familia> familias = new ArrayList<>();
 
         System.out.println(CIANO + "---Sistema de prioridade---" + RESET);
 
-        // menu
         while (true) {
             System.out.println("\n Escolha uma opção: ");
-            System.out.println("\n 1 - Cadastrar nova família");
+            System.out.println(" 1 - Cadastrar nova família");
             System.out.println(" 2 - Listar famílias");
-            System.out.println(" 3 - Vê prioridade na fila");
-            System.out.println(" 4 - sair");
+            System.out.println(" 3 - Ver prioridade na fila");
+            System.out.println(" 4 - Sair");
+
             int opcao = Integer.parseInt(entrada.nextLine());
 
             if (opcao == 1) {
                 boolean flagDeficiencia = false;
-                boolean flagRisco = false;
+                boolean flagTemRisco = false;
+                boolean flagRiscoTipo = false;
                 boolean flagDesemprego = false;
 
                 boolean temDeficiencia = false;
@@ -38,12 +36,15 @@ public class Main {
                 int numeroDependentes = 0;
                 int numeroDeficientes = 0;
                 int desempregoEmMeses = 0;
-
                 String tipoRisco = "nenhum";
+                String titular = "";
 
+                System.out.println(CIANO + "\n---Cadastro de Nova Família---" + RESET);
 
-                System.out.println(AMARELO +"\n---Cadastro de Nova Família---" + RESET);
-
+        
+                System.out.println(CIANO + "╔══════════════════════════════════════════════════════════════╗");
+                System.out.println("║                 CADASTRO DE NOVA FAMÍLIA                     ║");
+                System.out.println("╚══════════════════════════════════════════════════════════════╝" + RESET);
 
                 System.out.print("Qual a renda per capita da família? ");
                 rendaPerCapita = Integer.parseInt(entrada.nextLine());
@@ -52,177 +53,188 @@ public class Main {
                 numeroDependentes = Integer.parseInt(entrada.nextLine());
 
                 while (!flagDeficiencia) {
-                    System.out.print("Alguém apresenta algum tipo de deficiência? (sim/não):");
-                    String existeRisco = entrada.nextLine().toLowerCase();
-                    if (existeRisco.equals("sim") || existeRisco.equals("s")) {
+                    System.out.print("Alguém apresenta algum tipo de deficiência? (sim/não): ");
+                    String resposta = entrada.nextLine().toLowerCase();
+                    if (resposta.equals("sim") || resposta.equals("s")) {
                         temDeficiencia = true;
                         System.out.print("Quantos integrantes?: ");
                         numeroDeficientes = Integer.parseInt(entrada.nextLine());
                         flagDeficiencia = true;
-                    } else if (existeRisco.equals("não") || existeRisco.equals("n")) {
+                    } else if (resposta.equals("não") || resposta.equals("n") || resposta.equals("nao")) {
                         flagDeficiencia = true;
                     } else {
                         System.out.println("Preencha com uma resposta válida.");
                     }
                 }
 
-                while (!flagRisco) {
+                while (!flagTemRisco) {
                     System.out.print("Existe risco no bairro? (sim/não): ");
-                    String existeRisco = entrada.nextLine().toLowerCase();
-                    if (existeRisco.equals("sim") || existeRisco.equals("s")) {
-                        System.out.print("De qual tipo? (violência/natural/ambos) ");
-                        tipoRisco = entrada.nextLine().toLowerCase();
-                        flagRisco = true;
-                    } else if (existeRisco.equals("não") || existeRisco.equals("n")) {
-                        flagRisco = true;
+                    String resposta = entrada.nextLine().toLowerCase();
+                    if (resposta.equals("sim") || resposta.equals("s")) {
+                        while (!flagRiscoTipo) {
+                            System.out.print("De qual tipo? (violência/natural/ambos): ");
+                            tipoRisco = entrada.nextLine().toLowerCase();
+                            if (tipoRisco.equals("violência") || tipoRisco.equals("violencia")
+                                    || tipoRisco.equals("natural") || tipoRisco.equals("ambos")) {
+                                flagTemRisco = true;
+                                flagRiscoTipo = true;
+                            } else {
+                                System.out.print("Preencha com uma resposta válida.");
+                            }
+                        }
+
+                    } else if (resposta.equals("não") || resposta.equals("n") || resposta.equals("nao")) {
+                        flagTemRisco = true;
                     } else {
                         System.out.println("Preencha com uma resposta válida.");
-                    }}
+                    }
+                }
 
                 while (!flagDesemprego) {
-                    System.out.print("Existe risco no bairro? (sim/não): ");
-                    String existeDesemprego = entrada.nextLine().toLowerCase();
-                    if (existeDesemprego.equals("sim") || existeDesemprego.equals("s")) {
+                    System.out.print("Alguém desempregado? (sim/não): ");
+                    String resposta = entrada.nextLine().toLowerCase();
+                    if (resposta.equals("sim") || resposta.equals("s")) {
                         System.out.print("Há quantos meses?: ");
                         desempregoEmMeses = Integer.parseInt(entrada.nextLine());
                         flagDesemprego = true;
-                    } else if (existeDesemprego.equals("não") || existeDesemprego.equals("n")) {
+                    } else if (resposta.equals("não") || resposta.equals("n") || resposta.equals("nao")) {
                         flagDesemprego = true;
                     } else {
                         System.out.println("Preencha com uma resposta válida.");
-                    }}
-                System.out.print("Alguém desempregado? (sim/não): ");
-                if (entrada.nextLine().equalsIgnoreCase("sim")) {
-                    System.out.print("Há quantos meses?: ");
-                    desempregoEmMeses = Integer.parseInt(entrada.nextLine());
+                    }
                 }
+                System.out.print("Indique o nome do títular da familía: ");
+                titular = entrada.nextLine();
 
-                // ----PARTE DA CRIAÇÃO DE TODAS AS FAMÍLIAS----
+
+                
                 String id = "F" + String.format("%03d", familias.size() + 1);
-                Familia nova = new Familia(id, rendaPerCapita, numeroDependentes, temDeficiencia, numeroDeficientes, desempregoEmMeses, tipoRisco);
-                familias.add(nova);
+                
+                System.out.println("\n" + CIANO + "╔═══════════════════════ RESUMO DO CADASTRO ═════════════════════════╗");
+                System.out.printf("║ %-18s : %-45s ║%n", "ID Gerado", id);
+                System.out.printf("║ %-18s : %-45s ║%n", "Titular", titular);
+                System.out.printf("║ %-18s : R$ %-42d ║%n", "Renda per capita", rendaPerCapita);
+                System.out.printf("║ %-18s : %-45d ║%n", "Dependentes", numeroDependentes);
+                System.out.printf("║ %-18s : %-45s ║%n", "Deficiência", 
+                    (temDeficiencia ? numeroDeficientes + " pessoa(s)" : "Não"));
+                System.out.printf("║ %-18s : %-45s ║%n", "Risco", 
+                    (tipoRisco.equals("nenhum") ? "Não" : tipoRisco.toUpperCase()));
+                System.out.printf("║ %-18s : %-45s ║%n", "Desemprego", 
+                    (desempregoEmMeses > 0 ? desempregoEmMeses + " meses" : "Não"));
+                System.out.println("╚════════════════════════════════════════════════════════════════════╝" + RESET);
 
-                System.out.println(VERDE + "Família " + id + " cadastrada com sucesso!" + RESET);
+                System.out.print("\nDeseja confirmar o cadastro? (sim/não): ");
+                String confirma = entrada.nextLine().toLowerCase();
 
+                if (confirma.equals("sim") || confirma.equals("s")) {
+                    id = "F" + String.format("%03d", familias.size() + 1);
+                    Familia nova = new Familia(id, titular, rendaPerCapita, numeroDependentes, temDeficiencia, numeroDeficientes, desempregoEmMeses, tipoRisco);
+                    familias.add(nova);
+
+                    System.out.println(VERDE + "Família " + id + " cadastrada com sucesso!" + RESET);
+                } else {
+                    System.out.println(VERMELHO + "Cadastro cancelado." + RESET);
+                }
 
             } else if (opcao == 2) {
                 System.out.println("\n" + CIANO + "------------------------------------------------------------");
                 System.out.printf("%-6s | %-10s | %-12s | %-10s | %-10s%n", "ID", "RENDA", "DEPENDENTES", "RISCO", "STATUS");
                 System.out.println("------------------------------------------------------------" + RESET);
                 for (Familia f : familias) {
-                    f.calcularPontuacao(); // Garante que o total está atualizado
+                    f.calcularPontuacao();
                     System.out.printf("%-6s | R$%-8d | %-12d | %-10s | %-10s%n",
                             f.idFamilia, f.rendaPerCapita, f.dependentes, f.risco, f.getNivelVulnerabilidade());
                 }
 
-
             } else if (opcao == 3) {
-                // --- 4. ORDENAÇÃO CORRETA (Lógica) ---
-                // Primeiro calcula a pontuação de todos
                 for (Familia f : familias) f.calcularPontuacao();
-
-                // Depois ordena do maior para o menor
                 familias.sort(Comparator.comparingInt((Familia f) -> f.total).reversed());
 
                 System.out.println(AMARELO + "\n--- RANKING DE PRIORIDADE ---" + RESET);
                 for (int i = 0; i < familias.size(); i++) {
                     Familia f = familias.get(i);
-                    System.out.println((i + 1) + "º Lugar: " + f.idFamilia + " | Pontos: " + f.total + " (" + f.getNivelVulnerabilidade() + ")");
+                    System.out.println(
+                            (i + 1) + "º Lugar: " + f.idFamilia +
+                            " | Titular: " + f.titular +
+                            " | Pontos: " + f.total +
+                            " (" + f.getNivelVulnerabilidade() + ")");
                 }
 
             } else if (opcao == 4) {
                 System.out.println(VERMELHO + "Encerrando...");
                 break;
             }
-
         }
-
     }
+
     static class Familia {
 
-    String idFamilia;
-    int rendaPerCapita;
-    int dependentes;
-    boolean deficiencia;
-    int deficientes;
-    int desemprego;
-    String risco;
-    int bonus;
-    int total;
+        String idFamilia;
+        String titular;
+        int rendaPerCapita;
+        int dependentes;
+        boolean deficiencia;
+        int deficientes;
+        int desemprego;
+        String risco;
+        int total;
 
-    public Familia(String idFamilia, int rendaPerCapita, int dependentes, boolean deficiencia, int deficientes, int desemprego,
-            String risco) {
+        public Familia(String idFamilia, String titular, int rendaPerCapita, int dependentes, boolean deficiencia, int deficientes, int desemprego,
+                String risco) {
 
-        this.idFamilia = idFamilia;
-        this.rendaPerCapita = rendaPerCapita;
-        this.dependentes = dependentes;
-        this.deficiencia = deficiencia;
-        this.deficientes = deficientes;
-        this.desemprego = desemprego;
-        this.risco = risco;
-        this.bonus = 15;
-
-    }
-
-    public void calcularPontuacao() {
-        if (rendaPerCapita <= 200) {
-            this.total = this.total + this.bonus + 10;
-        } else if (rendaPerCapita <= 400) {
-            this.total = this.total + this.bonus;
-        } else if (rendaPerCapita <= 600) {
-            this.total = this.total + 10;
-        } else if (rendaPerCapita <= 700) {
-            this.total = this.total + 5:
+            this.idFamilia = idFamilia;
+            this.titular = titular;
+            this.rendaPerCapita = rendaPerCapita;
+            this.dependentes = dependentes;
+            this.deficiencia = deficiencia;
+            this.deficientes = deficientes;
+            this.desemprego = desemprego;
+            this.risco = risco;
+            this.total = 0;
         }
 
-        if (deficientes > 0) {
-            this.total = this.total + 10 * this.deficientes;
-        }
+        public void calcularPontuacao() {
+            this.total = 0; // Zera para não somar infinitamente ao listar várias vezes
 
-        if (dependentes > 0) {
-            this.total = this.total + 10 * this.dependentes;
-        }
+            if (rendaPerCapita <= 200) {
+                this.total += 25;
+            } else if (rendaPerCapita <= 400) {
+                this.total += 15;
+            } else if (rendaPerCapita <= 600) {
+                this.total += 10;
+            } else if (rendaPerCapita <= 700) {
+                this.total += 5;
+            }
 
-        if (risco != null) {
-            if (risco.equals("violencia") || risco.equals("violência") || risco.equals("natural")) {
-                this.total = this.total + 7;
-            } else if (risco.equals("ambos")) {
-                this.total = this.total + 10;
+            if (deficientes > 0) {
+                this.total += 10 * this.deficientes;
+            }
+
+            if (dependentes > 0) {
+                this.total += 10 * this.dependentes;
+            }
+
+            if (risco != null && !risco.equals("nenhum")) {
+                if (risco.contains("violen") || risco.equals("natural")) {
+                    this.total += 7;
+                } else if (risco.equals("ambos")) {
+                    this.total += 12;
+                }
+            }
+
+            if (desemprego > 0) {
+                if (desemprego <= 6) {
+                    this.total += 5;
+                } else {
+                    this.total += 10;
+                }
             }
         }
 
-        if (desemprego > 0) {
-            if (desemprego <= 6) {
-                this.total = this.total + 5;
-            } else if (desemprego >= 12) {
-                this.total = this.total + 10;
-            }
+        public String getNivelVulnerabilidade() {
+            if (this.total > 50) return VERMELHO + "CRÍTICA" + RESET;
+            if (this.total > 30) return AMARELO + "MODERADA" + RESET;
+            return VERDE + "BAIXA" + RESET;
         }
     }
-
-    public void mostrarDados() {
-
-        System.out.println("Id: " + this.idFamilia);
-        System.out.println("Renda per capita: " + this.rendaPerCapita);
-        System.out.println("Dependentes: " + this.dependentes);
-        System.out.println("Deficiência? " + this.deficientes);
-        System.out.println("Desemprego: " + this.desemprego + " meses");
-        System.out.println("Risco: " + this.risco);
-        System.out.println("Prioridade: " + this.total + "\n");
-
-    }
-
-
- public String getNivelVulnerabilidade() {
-        if (this.total > 50) return Main.VERMELHO + "CRÍTICA" + Main.RESET;
-        if (this.total > 30) return Main.AMARELO + "MODERADA" + Main.RESET;
-        return Main.VERDE + "BAIXA" + Main.RESET;
-    }
-
-    }
-
 }
-
-
- 
-
