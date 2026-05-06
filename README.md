@@ -107,7 +107,7 @@ Ao iniciar o programa, você verá um menu interativo:
 
 ├── Main.java         # Código fonte principal e classe interna Familia
 
-├── familias.txt      # Arquivo gerado automaticamente com os dados salvos
+├── familias.txt      # Arquivo gerado automaticamente com os dados salvos (em progresso)
 
 └── README.md         # Documentação do projeto
 
