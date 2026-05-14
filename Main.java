@@ -13,19 +13,68 @@ public class Main {
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
         ArrayList<Familia> familias = new ArrayList<>();
+        ArrayList<Funcionario> funcionarios = new ArrayList<>();
 
-        System.out.println(CIANO + "---Sistema de prioridade---" + RESET);
+        System.out.println(CIANO + "=== SISTEMA INTEGRADO ===" + RESET);
 
         while (true) {
-            System.out.println("\n Escolha uma opção: ");
-            System.out.println(" 1 - Cadastrar nova família");
-            System.out.println(" 2 - Listar famílias");
-            System.out.println(" 3 - Ver prioridade na fila");
-            System.out.println(" 4 - Sair");
+            System.out.println("\n" + CIANO + "╔══════════════════════════════════════════════════════════════╗");
+            System.out.println("║                    MENU PRINCIPAL                            ║");
+            System.out.println("╚══════════════════════════════════════════════════════════════╝" + RESET);
 
-            int opcao = Integer.parseInt(entrada.nextLine());
+            
+            System.out.println(" 1 - Sistema de Famílias (Prioridade) ");
+            System.out.println(" 2 - Sistema de Funcionários (Folha de Pagamento)");
+            System.out.println(" 0 - Sair");
+
+            System.out.println("\n Escolha uma opção: ");
+           int opcao = Integer.parseInt(entrada.nextLine());
 
             if (opcao == 1) {
+                sistemaFamilia(entrada, familias);            
+            }
+            else if (opcao == 2) {
+                sistemaFuncionarios(entrada, funcionarios);
+            }
+            else if (opcao == 0) {
+                System.out.println(VERMELHO + "Encerrando o sistema..." + RESET);
+                break;
+            } else {
+                System.out.println(VERMELHO + "Opção invalida...");
+            }
+        }
+        entrada.close();    
+    }
+
+        //                          ÁREA DO SISTEMA DE FAMÍLIAS (prioridade)
+        // _________________________________________________________________________________________
+
+        private static void sistemaFamilia(Scanner entrada, ArrayList<Familia> familias) {
+            while (true) {
+                
+            
+                
+
+        
+                System.out.println(CIANO + "╔══════════════════════════════════════════════════════════════╗");
+                System.out.println("║                 SISTEMA DE FAMÍLIAS (prioridade)                    ║");
+                System.out.println("╚══════════════════════════════════════════════════════════════╝" + RESET);
+
+                System.out.println("\n1 - Cadastrar nova família");
+                System.out.println("2 - Listar famílias");
+                System.out.println("3 - Ver prioridade na fila");
+                System.out.println("0 - Voltar ao Menu Principal");
+
+                System.out.println("\nEscolha uma opção: ");
+                int opcaoFamilia = entrada.nextInt();
+                entrada.nextLine();
+
+                
+
+                if (opcaoFamilia == 1) {
+                //                          CADASTRO
+               //_________________________________________________________________
+
                 boolean flagDeficiencia = false;
                 boolean flagTemRisco = false;
                 boolean flagRiscoTipo = false;
@@ -110,6 +159,10 @@ public class Main {
                 
                 String id = "F" + String.format("%03d", familias.size() + 1);
                 
+
+               
+                //                          RESUMO
+
                 System.out.println("\n" + CIANO + "╔═══════════════════════ RESUMO DO CADASTRO ═════════════════════════╗");
                 System.out.printf("║ %-18s : %-45s ║%n", "ID Gerado", id);
                 System.out.printf("║ %-18s : %-45s ║%n", "Titular", titular);
@@ -135,8 +188,14 @@ public class Main {
                 } else {
                     System.out.println(VERMELHO + "Cadastro cancelado." + RESET);
                 }
+            // ____________________________________________________________________________________________________________________________
 
-            } else if (opcao == 2) {
+
+
+            //                      LISTAR FAMILIA
+            //_____________________________________________________________
+
+            } else if (opcaoFamilia == 2) {
                 System.out.println("\n" + CIANO + "------------------------------------------------------------");
                 System.out.printf("%-6s | %-10s | %-12s | %-10s | %-10s%n", "ID", "RENDA", "DEPENDENTES", "RISCO", "STATUS");
                 System.out.println("------------------------------------------------------------" + RESET);
@@ -145,8 +204,12 @@ public class Main {
                     System.out.printf("%-6s | R$%-8d | %-12d | %-10s | %-10s%n",
                             f.idFamilia, f.rendaPerCapita, f.dependentes, f.risco, f.getNivelVulnerabilidade());
                 }
+                
 
-            } else if (opcao == 3) {
+            //                      RANKING
+            //___________________________________________________________
+
+            } else if (opcaoFamilia == 3) {
                 for (Familia f : familias) f.calcularPontuacao();
                 familias.sort(Comparator.comparingInt((Familia f) -> f.total).reversed());
 
@@ -160,13 +223,131 @@ public class Main {
                             " (" + f.getNivelVulnerabilidade() + ")");
                 }
 
-            } else if (opcao == 4) {
+            } else if (opcaoFamilia == 0) {
                 System.out.println(VERMELHO + "Encerrando...");
                 break;
             }
         }
     }
 
+    private static void cadastrarFuncionarioPadrão(Scanner sc, ArrayList<Funcionario> lista) {
+        System.out.println(CIANO + "\n=== CADASTRO DE FUNCIONÁRIO PADRÃO ===" + RESET);
+
+        System.out.print("Nome: ");
+        String nome = sc.nextLine();
+        System.out.print("Matrícula: ");
+        String matricula = sc.nextLine();
+
+        String id = "F" + String.format("%03d", lista.size() + 1);
+
+
+        System.out.println("\n" + CIANO + "╔═══════════════════════ RESUMO DO CADASTRO ═══════════════════════╗");
+        System.out.printf("║ %-18s : %-45s ║%n", "ID", id);
+        System.out.printf("║ %-18s : %-45s ║%n", "Nome", nome);
+        System.out.printf("║ %-18s : %-45s ║%n", "Matrícula", matricula);
+        System.out.printf("║ %-18s : %-45s ║%n", "Tipo", "Padrão (Salário Base)");
+        System.out.println("╚══════════════════════════════════════════════════════════════════════╝" + RESET);
+
+
+        System.out.println("\nConfirmar cadastro? (sim/não): ");
+        if (sc.nextLine().toLowerCase().startsWith("s")) {
+            lista.add(new funcionarioPadrão(id, nome, matricula));
+            System.out.println(VERDE + "Funionário cadastrado com sucesso!" + RESET);
+        } else {
+            System.out.println(VERMELHO + "Cadastro cancelado." + RESET);
+        }
+    }
+
+    private static void cadastrarFuncionarioComissionado(Scanner sc, ArrayList<Funcionario> lista) {
+        System.out.println(CIANO + "\n===CADASTRO DE FUNCIONÁRIO COMISSIONADO ===" + RESET);
+        
+        
+        System.out.print("Nome: ");
+        String nome = sc.nextLine();
+        
+        System.out.print("Matrícula: ");
+        String matricula = sc.nextLine();
+
+        System.out.print("Valor das vendas (R$): ");
+        double vendas = Double.parseDouble(sc.nextLine());
+
+        System.out.print("Percentual de comissão (%): ");
+        double percentual = Double.parseDouble(sc.nextLine());
+
+
+        String id = "F" + String.format("%03d", lista.size() + 1);
+        
+        
+        System.out.println("\n" + CIANO + "╔═══════════════════════ RESUMO DO CADASTRO ═══════════════════════╗");
+        System.out.printf("║ %-18s : %-45s ║%n", "ID", id);
+        System.out.printf("║ %-18s : %-45s ║%n", "Nome", nome);
+        System.out.printf("║ %-18s : %-45s ║%n", "Matrícula", matricula);
+        System.out.printf("║ %-18s : R$ %-42.2f ║%n", "Vendas", vendas);
+        System.out.printf("║ %-18s : %-45.2f ║%n", "Comissão (%)", percentual);
+        System.out.println("╚══════════════════════════════════════════════════════════════════════╝" + RESET);
+
+        System.out.println("\nConfirmar cadastro? (sim/não): ");
+        if (sc.nextLine().toLowerCase().startsWith("s")) {
+            lista.add(new funcionarioComissionado(id, nome, matricula, vendas, percentual));
+            System.out.println(VERDE + "Funcionário Comissionado cadastrado!" + RESET);
+        } else {
+            System.out.println(VERMELHO + "Cadastro cancelado." + RESET);
+        }
+    }
+
+    private static void cadastrarFuncionarioProducao(Scanner sc, ArrayList<Funcionario> lista) {
+        System.out.println(CIANO + "\n=== CADASTRO DE FUNCIONÁRIO DE PRODUÇÃO ===" + RESET);
+
+        System.out.println("Nome: ");
+        String nome = sc.nextLine();
+
+        System.out.println("Matrícula: ");
+        String matricula = sc.nextLine();
+
+        System.out.println("Quantidade de peças produzidas: ");
+        int qtdPecas = Integer.parseInt(sc.nextLine());
+
+        System.out.println("Valor por peça (R$): ");
+        double valorPeca = Double.parseDouble(sc.nextLine());
+
+
+        String id = "F" + String.format("%03d", lista.size() + 1);
+
+        System.out.println("\n" + CIANO + "╔═══════════════════════ RESUMO DO CADASTRO ═══════════════════════╗");
+        System.out.printf("║ %-18s : %-45s ║%n", "ID", id);
+        System.out.printf("║ %-18s : %-45s ║%n", "Nome", nome);
+        System.out.printf("║ %-18s : %-45s ║%n", "Matrícula", matricula);
+        System.out.printf("║ %-18s : %-45d ║%n", "Qtd Peças", qtdPecas);
+        System.out.printf("║ %-18s : R$ %-42.2f ║%n", "Valor por peça", valorPeca);
+        System.out.println("╚══════════════════════════════════════════════════════════════════════╝" + RESET);
+
+
+        System.out.println("Confirmar cadastro? (sim/não): ");
+        if (sc.nextLine().toLowerCase().startsWith("s")) {
+            lista.add(new funcionarioProducao(id, nome, matricula, qtdPecas, valorPeca));
+            System.out.println(VERDE + "Funcionário de Produção cadastrado!" + RESET);
+        } else {
+            System.out.println(VERMELHO + "Cadastro cancelado." + RESET);
+        }
+    }
+
+    private static void gerarFolhaPagamento(ArrayList<Funcionario> lista) {
+        if (lista.isEmpty()) {
+            System.out.println(AMARELO + "Nenhum funcionario cadastrado ainda." + RESET);
+            return;
+        }
+        
+        System.out.println(CIANO + "\n" + "=".repeat(80));
+        System.out.println("                    FOLHA DE PAGAMENTO");
+        System.out.println("=".repeat(80) + RESET);
+
+
+        for (Funcionario f : lista) {
+            f.mostrarDados();
+            System.out.println("-".repeat(70));
+        }
+    }
+    
     static class Familia {
 
         String idFamilia;
@@ -237,4 +418,5 @@ public class Main {
             return VERDE + "BAIXA" + RESET;
         }
     }
+    
 }
