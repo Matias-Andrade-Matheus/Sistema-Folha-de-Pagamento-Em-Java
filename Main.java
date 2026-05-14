@@ -230,6 +230,53 @@ public class Main {
         }
     }
 
+    //                               A PARTE DE QUANDO CHAMA O SISTEMA DE FUNCIONÁRIOS
+    //________________________________________________________________________________________________________________
+    
+    private static void sistemaFuncionarios(Scanner entrada, ArrayList<Funcionario> funcionarios) {
+
+        while (true) {
+            System.out.println(CIANO + "=== SISTEMA DE FUNCIONARIO ===" + RESET);
+
+            System.out.println(CIANO + "\n╔══════════════════════════════════════════════════════════════╗");
+                System.out.println("║                 SISTEMA DE FUNCIONARIOS                     ║");
+                System.out.println("╚══════════════════════════════════════════════════════════════╝" + RESET);
+
+
+            System.out.println("\n1- Cadastrar funcionario padrão");
+            System.out.println("2- Cadastrar funcionario comissionado");
+            System.out.println("3- Cadastrar funcionario produção");
+            System.out.println("4- Gerar folha de pagamento");
+            System.out.println("0- Voltar");
+
+            int opcao = Integer.parseInt(entrada.nextLine());
+
+
+            if (opcao == 1) {
+                cadastrarFuncionarioPadrão(entrada, funcionarios);
+            }
+            else if (opcao == 2) {
+                cadastrarFuncionarioComissionado(entrada, funcionarios);
+            }
+            else if (opcao == 3) {
+                cadastrarFuncionarioProducao(entrada, funcionarios);
+            }
+            else if (opcao == 4) {
+                gerarFolhaPagamento(funcionarios);
+            } 
+            else if (opcao == 0) {
+                break;
+
+            } else {
+                System.out.println(VERDE + "Opção invalida" + RESET);
+            }
+
+
+        }
+    }
+
+
+
     private static void cadastrarFuncionarioPadrão(Scanner sc, ArrayList<Funcionario> lista) {
         System.out.println(CIANO + "\n=== CADASTRO DE FUNCIONÁRIO PADRÃO ===" + RESET);
 
@@ -251,7 +298,7 @@ public class Main {
 
         System.out.println("\nConfirmar cadastro? (sim/não): ");
         if (sc.nextLine().toLowerCase().startsWith("s")) {
-            lista.add(new funcionarioPadrão(id, nome, matricula));
+            lista.add(new funcionarioPadrao(id, nome, matricula));
             System.out.println(VERDE + "Funionário cadastrado com sucesso!" + RESET);
         } else {
             System.out.println(VERMELHO + "Cadastro cancelado." + RESET);
@@ -418,5 +465,83 @@ public class Main {
             return VERDE + "BAIXA" + RESET;
         }
     }
+
+
+    //                           CLASSE DOS FUNCIONARIOS
+    //___________________________________________________________________________________
+
+
+    static class Funcionario {
+        String id;
+        String nome;
+        String matricula;
+        double salarioBase = 2000.0;
+
+        public Funcionario(String id, String nome, String matricula) {
+            this.id = id;
+            this.nome = nome;
+            this.matricula = matricula;
+            
+        }
+
+        public double calcularSalario() {
+            return salarioBase;
+        }
+
+        public void mostrarDados() {
+            System.out.println("Id: " + id);
+            System.out.println("Nome: " + nome);
+            System.out.println("Matricula: " + matricula);
+            System.out.printf("Salário base: R$ %.2f%n", salarioBase);
+            System.out.printf("Salário final: R$ %.2f%n", calcularSalario());            
+        }
+
+    } 
+
+    static class funcionarioPadrao extends Funcionario {
+            public funcionarioPadrao(String id, String nome, String matricula) {
+                super(id, nome, matricula);
+            }
+            public double calcularSalario() {
+                return salarioBase; 
+            }
+            
+    }
     
+    static class funcionarioComissionado extends Funcionario {
+        double valorVendas;
+        double percentualComissao;
+
+        public funcionarioComissionado(String id, String nome, String matricula, double valorVendas, double percentualComissao) {
+            super(id, nome, matricula);
+            this.valorVendas = valorVendas;
+            this.percentualComissao = percentualComissao;
+            
+
+        }
+
+        public double calcularSalario() {
+            double comissao = valorVendas * (percentualComissao / 100.0);
+            return salarioBase + comissao;
+        }
+
+    }
+
+    static class funcionarioProducao extends Funcionario {
+        int qtdPecas;
+        double valorPeca;
+
+        public funcionarioProducao(String id, String nome, String matricula, int qtdPecas, double valorPeca) {
+            super(id, nome, matricula);
+            this.qtdPecas = qtdPecas;
+            this.valorPeca = valorPeca;
+        }
+        
+        public double calcularSalario() {
+            double bonus = qtdPecas * valorPeca;
+            return salarioBase + bonus;
+        }
+
+    }
+
 }
