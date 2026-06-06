@@ -40,7 +40,7 @@ public class Main {
                 System.out.println(VERMELHO + "Encerrando o sistema..." + RESET);
                 break;
             } else {
-                System.out.println(VERMELHO + "Opção invalida...");
+                System.out.println(VERMELHO + "Opção inválida...");
             }
         }
         entrada.close();    
@@ -57,7 +57,7 @@ public class Main {
 
         
                 System.out.println(CIANO + "╔══════════════════════════════════════════════════════════════╗");
-                System.out.println("║                 SISTEMA DE FAMÍLIAS (prioridade)                    ║");
+                System.out.println("║                 SISTEMA DE FAMÍLIAS (prioridade)            1 ║");
                 System.out.println("╚══════════════════════════════════════════════════════════════╝" + RESET);
 
                 System.out.println("\n1 - Cadastrar nova família");

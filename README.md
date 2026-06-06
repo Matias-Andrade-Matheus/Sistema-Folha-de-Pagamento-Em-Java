@@ -113,7 +113,7 @@ Ao iniciar o programa, você verá um menu interativo:
 
 # Autores
 
-Helena (nome completo) - Github [https://github.com/helenalucchesi]
+Helena Matutino Lucchesi - Github [https://github.com/helenalucchesi]
 
 Rafael Pina Alves - Github [https://github.com/rafaalves0]
 
